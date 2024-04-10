@@ -1,54 +1,53 @@
 Eiyaro
 
-[![Build Status](https://travis-ci.org/Eiyaro/e.svg)](https://travis-ci.org/Eiyaro/ey) [![AGPL v3](https://img.shields.io/badge/license-AGPL%20v3-brightgreen.svg)](./LICENSE)
+[![Build](https://github.com/EIYARO/ey/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/EIYARO/ey/actions)
+[![Supports Windows](https://img.shields.io/badge/support-Windows-blue?logo=Windows)](https://github.com/EIYARO/ey/releases/latest)
+[![Supports Linux](https://img.shields.io/badge/support-Linux-yellow?logo=Linux)](https://github.com/EIYARO/ey/releases/latest)
+[![License](https://img.shields.io/github/license/EIYARO/ey)](https://github.com/EIYARO/ey/blob/master/LICENSE)
+[![Latest Release](https://img.shields.io/github/v/release/EIYARO/ey?label=latest%20release)](https://github.com/EIYARO/ey/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/EIYARO/ey/total)](https://github.com/EIYARO/ey/releases)
 
 **Official golang implementation of the Eiyaro protocol.**
 
-Automated builds are available for stable releases and the unstable master branch. Binary archives are published at https://github.com/Eiyaro/ey/releases.
+Automated builds are available for stable releases and the unstable master branch. Binary archives are published at https://github.com/EIYARO-Project/core/releases.
 
 ## What is Eiyaro?
 
-Eiyaro is software designed to operate and connect to highly scalable blockchain networks confirming to the Eiyaro Blockchain Protocol, which allows partipicants to define, issue and transfer digitial assets on a multi-asset shared ledger. Please refer to the [White Paper](https://github.com/Eiyaro/wiki/blob/master/en-US/Eiyaro-Technical-White-Paper-EN.pdf) for more details.
+The goal of the EIYARO project is to create a blockchain ecosystem with a wide range of application scenarios, and provide users with safe, efficient and convenient digital asset transaction services. We will reduce transaction costs, increase transaction speed, and ensure network security and stability through continuous technological innovation and optimisation.
 
 In the current state `eiyaro` is able to:
 
 - Manage key, account as well as asset
 - Send transactions, i.e., issue, spend and retire asset
 
-## Installing with Homebrew
-
-```
-brew tap eiyaro/eiyaro && brew install eiyaro
-```
 
 ## Building from source
 
 ### Requirements
 
-- [Go](https://golang.org/doc/install) version 1.8 or higher, with `$GOPATH` set to your preferred directory
+- [Go](https://golang.org/doc/install) version 1.18 or higher, with `$GOPATH` set to your preferred directory
 
 ### Installation
 
 Ensure Go with the supported version is installed properly:
 
-```bash
+```console
 $ go version
 $ go env GOROOT GOPATH
 ```
 
 - Get the source code
 
-``` bash
-$ git clone https://github.com/Eiyaro/ey.git $GOPATH/src/eiyaro/ey
+```console
+$ git clone https://github.com/EIYARO-Project/core.git $GOPATH/src/eiyaro/core
 ```
 
 - Build source code
 
-``` bash
-$ cd $GOPATH/src/eiyaro/ey
-$ go mod tidy
-$ make eiyarocd    
-$ make eiyaroccli  
+```console
+$ cd $GOPATH/src/eiyaro/core
+$ make eiyarod    
+$ make eiyarocli  
 ```
 
 When successfully building the project, the `eiyarod` and `eiyarocli` binary should be present in `cmd/eiyarod` and `cmd/eiyarocli` directory, respectively.
@@ -59,8 +58,8 @@ The Eiyaro project comes with several executables found in the `cmd` directory.
 
 | Command      | Description                                                  |
 | ------------ | ------------------------------------------------------------ |
-| **eiyarocd**   | eiyarod command can help to initialize and launch eiyaro domain by custom parameters. `eiyarod --help` for command line options. |
-| **eiyaroccli** | Our main Eiyaro CLI client. It is the entry point into the Eiyaro network (main-, test- or private net), capable of running as a full node archive node (retaining all historical state). It can be used by other processes as a gateway into the Eiyaro network via JSON RPC endpoints exposed on top of HTTP, WebSocket and/or IPC transports. `eiyarocli --help` and the [eiyaroccli API page](https://github.com/EIYARO/ey/blob/main/API-Reference.md) for command line options. |
+| **eiyarod**   | eiyarod command can help to initialize and launch eiyaro domain by custom parameters. `eiyarod --help` for command line options. |
+| **eiyarocli** | Our main Eiyaro CLI client. It is the entry point into the Eiyaro network (main-, test- or private net), capable of running as a full node archive node (retaining all historical state). It can be used by other processes as a gateway into the Eiyaro network via JSON RPC endpoints exposed on top of HTTP, WebSocket and/or IPC transports. `eiyarocli --help` and the [eiyaroccli API page](https://github.com/EIYARO/ey/blob/main/API-Reference.md) for command line options. |
 
 ## Running eiyaro
 
@@ -70,11 +69,9 @@ Currently, eiyaro is still in active development and a ton of work needs to be d
 
 First of all, initialize the node:
 
-```bash
-$ cd /src/eiyaro/ey/cmd/eiyarod
-$ go build
+```console
+$ cd ./cmd/eiyarod
 $ ./eiyarod init --chain_id mainnet
-
 ```
 
 There are three options for the flag `--chain_id`:
@@ -87,9 +84,8 @@ After that, you'll see `config.toml` generated, then launch the node.
 
 ### launch
 
-``` bash
+```console
 $ nohup ./eiyarod node &
-
 ```
 
 available flags for `eiyarod node`:
@@ -139,8 +135,8 @@ Given the `eiyarod` node is running, the general workflow is as follows:
 __simd feature:__
 
 You could enable the _simd_ feature to speed up the _PoW_ verification (e.g., during mining and block verification) by simply:
-```
-eiyarod node --simd.enable
+```console
+$ eiyarod node --simd.enable
 ```
 
 To enable this feature you will need to compile from the source code by yourself, and `make eiyarod-simd`. 
@@ -156,9 +152,8 @@ For more details about using `eiyarocli` command please refer to [API Reference]
 
 Copy and save your tokename, tokename is used to log into your node page Access the dashboard:
 
-```
-$ cd /src/eiyaro/ey/cmd/eiyarocli
-$ go build
+```console
+$ cd ./cmd/eiyarocli
 $ ./eiyarocli create-access-token eiyaro
 
 $ open http://localhost:9888/ OR Login with your IP + 9888 port
@@ -168,17 +163,25 @@ $ open http://localhost:9888/ OR Login with your IP + 9888 port
 
 Ensure your [Docker](https://www.docker.com/) version is 17.05 or higher.
 
-```bash
+```console
 $ docker build -t eiyaro .
 ```
 
-For the usage please refer to [running-in-docker-wiki](https://github.com/Eiyaro/ey/wiki/Running-in-Docker).
+For the usage please refer to [running-in-docker-wiki](https://github.com/EIYARO-Project/core/wiki/Running-in-Docker).
+
+
+## Installing with Homebrew
+
+```console
+$ brew tap eiyaro/eiyaro && brew install eiyaro
+```
+
 
 ## Contributing
 
 Thank you for considering helping out with the source code! Any contributions are highly appreciated, and we are grateful for even the smallest of fixes!
 
-If you run into an issue, feel free to [eiyaro issues](https://github.com/Eiyaro/ey/issues/) in this repository. We are glad to help!
+If you run into an issue, feel free to [eiyaro issues](https://github.com/EIYARO-Project/core/issues/) in this repository. We are glad to help!
 
 ## License
 
